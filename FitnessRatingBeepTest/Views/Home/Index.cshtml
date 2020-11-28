@@ -1,8 +1,73 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.3.0/snap.svg-min.js"></script>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<script type="text/javascript">
+    $(document).ready(function () {
+        readJsonFile("/json/AltheleteList.json", function (text) {
+            var data = JSON.parse(text);
+            var athleteList = '<ol>';
+            for (var i = 0; i < data.length; i++) {
+                console.log(data[i].AtheleteName)
+                athleteList += '<li>' + data[i].AtheleteName + '</li>';
+            }
+            athleteList += '</ol>';
+            console.log(athleteList)
+            $('#athleteList').html("");
+            $('#athleteList').html(athleteList);
+        });
+    })
+</script>
+
+<script type="text/javascript">
+    var count = $('#count');
+    $({ Counter: 0 }).animate({ Counter: count.text() }, {
+        duration: 5000,
+        easing: 'linear',
+        step: function () {
+            count.text(Math.ceil(this.Counter) + "%");
+        }
+    });
+
+    var s = Snap('#animated');
+    var progress = s.select('#progress');
+
+    progress.attr({ strokeDasharray: '0, 251.2' });
+    Snap.animate(0, 251.2, function (value) {
+        progress.attr({ 'stroke-dasharray': value + ',251.2' });
+    }, 5000);
+
+    //Common function to read data
+    function readJsonFile(file, callback) {
+        var rawFile = new XMLHttpRequest();
+        rawFile.overrideMimeType("application/json");
+        rawFile.open("GET", file, true);
+        rawFile.onreadystatechange = function () {
+            if (rawFile.readyState === 4 && rawFile.status == "200") {
+                callback(rawFile.responseText);
+            }
+        }
+        rawFile.send(null);
+    }
+</script>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <svg id="animated" viewbox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="#FDB900" />
+            <path id="progress" stroke-linecap="round" stroke-width="5" stroke="#fff" fill="none"
+                  d="M50 10
+           a 40 40 0 0 1 0 80
+           a 40 40 0 0 1 0 -80">
+            </path>
+            <text id="count" x="50" y="50" text-anchor="middle" dy="7" font-size="20">50%</text>
+        </svg>
+    </div>
+</div>
+<div class="row">
+    <button class="btn btn-primary">Submit</button>
+    <div class="col-md-12">
+        <div id="athleteList">
+        </div>
+    </div>
 </div>
