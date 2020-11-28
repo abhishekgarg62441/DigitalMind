@@ -1,0 +1,28 @@
+[
+  {
+    "AtheleteID": "1",
+    "AtheleteName": "Abhishek",
+    "IsWarned": "false",
+    "IsStoped": "false",
+    "SpeedLevel": "23",
+    "ShuttleNo": "7"
+  },
+  {
+
+    "AtheleteID": "2",
+    "AtheleteName": "Amit",
+    "IsWarned": "false",
+    "IsStoped": "false",
+    "SpeedLevel": "23",
+    "ShuttleNo": "7"
+  },
+  {
+
+    "AtheleteID": "3",
+    "AtheleteName": "John",
+    "IsWarned": "false",
+    "IsStoped": "false",
+    "SpeedLevel": "23",
+    "ShuttleNo": "7"
+  }
+]
